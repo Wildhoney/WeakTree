@@ -1,2 +1,3 @@
-# CompositeWeakMap
-A composited WeakMap implementation that allows for maps with multiple keys.
+# `WeakTree`
+
+> WeakMap implementation that allows for composite keys in a tree formation.
