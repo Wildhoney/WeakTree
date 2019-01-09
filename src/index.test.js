@@ -9,13 +9,19 @@ const key = {
 
 test('It should be able to set, get and delete from the composited WeakMap;', t => {
     const wt = new WeakTree();
+
     wt.set([key.watford, key.adam], 'Adam');
     wt.set([key.watford, key.maria], 'Maria');
+
     t.is(wt.get([key.watford, key.adam]), 'Adam');
     t.is(wt.get([key.watford, key.maria]), 'Maria');
+
     wt.delete([key.watford, key.adam]);
     t.false(wt.has([key.watford, key.adam]));
     t.true(wt.has([key.watford, key.maria]));
+
+    t.false(wt.has([key.adam, key.maria]));
+    t.false(wt.delete([key.adam, key.maria]));
 });
 
 test('It should return the same types from the functions as WeakMap itself;', t => {

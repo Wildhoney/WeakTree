@@ -10,12 +10,12 @@ export const fetch = (f, map) =>
     function fetchR(keys) {
         const last = keys.length === 1;
         const [key, ...remainingKeys] = keys;
-        return last ? map[f](key) : fetchR(remainingKeys);
+        return last || !map.has(key) ? map[f](key) : fetchR(remainingKeys);
     };
 
 export const remove = map =>
     function deleteR(keys) {
         const last = keys.length === 1;
         const [key, ...remainingKeys] = keys;
-        return last ? map.delete(key) : deleteR(remainingKeys);
+        return last || !map.has(key) ? map.delete(key) : deleteR(remainingKeys);
     };
