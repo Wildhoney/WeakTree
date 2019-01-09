@@ -1,4 +1,4 @@
-![WeakTree](media/logo.png)
+<img src="media/logo.png" alt="Switzerland" width="300" />
 
 > WeakMap implementation that allows for composite keys in a tree formation.
 
