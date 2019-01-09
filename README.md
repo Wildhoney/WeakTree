@@ -1,4 +1,4 @@
-# `WeakTree`
+![WeakTree](media/logo.png)
 
 > WeakMap implementation that allows for composite keys in a tree formation.
 
