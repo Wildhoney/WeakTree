@@ -19,6 +19,8 @@
 Use the array notation to set keys for your `WeakTree`. You can perform the same operations on a `WeakTree` as you can on a `WeakMap`, such as `set`, `get`, `has` and `delete`.
 
 ```javascript
+import WeakTree from 'weaktree';
+
 const a = {};
 const b = {};
 
