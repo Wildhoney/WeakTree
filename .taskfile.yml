@@ -1,0 +1,19 @@
+- name: format
+  tasks: 
+    - prettier --write 'src/*.js'
+    - prettier --write '*.{js,json}'
+
+- name: test/lint
+  tasks:
+      - readlint
+      # - - prettier --list-different 'src/*.js'
+      # - - prettier --list-different '*.{js,json}'
+      # - - - eslint "src/*.js"
+
+- name: test/spec
+  task: ava
+
+- name: test
+  tasks:
+      - taskfile test/spec
+      - - taskfile test/lint
