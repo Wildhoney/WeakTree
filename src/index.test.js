@@ -23,6 +23,14 @@ test('It should be able to set, get and delete from the composited WeakMap;', t 
     t.false(wt.delete([adam, maria]));
 });
 
+test('It should be able to initialise the tree with a set of predefined values;', t => {
+    const keys = [[[watford, adam], 'Adam'], [[watford, maria], 'Maria']];
+
+    const wt = new WeakTree(keys);
+    t.is(wt.get([watford, adam]), 'Adam');
+    t.is(wt.get([watford, maria]), 'Maria');
+});
+
 test('It should return the same types from the functions as WeakMap itself;', t => {
     const wt = new WeakTree();
     const wm = new WeakMap();

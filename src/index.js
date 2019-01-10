@@ -18,7 +18,7 @@ const get = f =>
     };
 
 export default class WeakTree {
-    constructor() {
+    constructor(map) {
         const m = (this.map = new WeakMap());
         this.helpers = {
             set: set,
@@ -26,6 +26,8 @@ export default class WeakTree {
             has: get(m.has),
             delete: get(m.delete)
         };
+        Array.isArray(map) &&
+            map.forEach(([keys, value]) => this.set(keys, value));
     }
 
     set(keys, value) {
