@@ -17,32 +17,25 @@ const get = f =>
             : recurse(map.get(key), remainingKeys);
     };
 
-export default class WeakTree {
-    constructor(map) {
-        const m = (this.map = new WeakMap());
-        this.helpers = {
-            set: set,
-            get: get(m.get),
-            has: get(m.has),
-            delete: get(m.delete)
-        };
-        Array.isArray(map) &&
-            map.forEach(([keys, value]) => this.set(keys, value));
-    }
+export default function WeakTree(iterator) {
+    const map = new WeakMap();
 
-    set(keys, value) {
-        return this.helpers.set(this.map, keys, value);
-    }
+    const helpers = {
+        set: set,
+        get: get(map.get),
+        has: get(map.has),
+        delete: get(map.delete)
+    };
 
-    get(keys) {
-        return this.helpers.get(this.map, keys);
-    }
+    const isIterable =
+        iterator && typeof iterator[Symbol.iterator] === 'function';
+    isIterable &&
+        iterator.forEach(([keys, value]) => helpers.set(map, keys, value));
 
-    has(keys) {
-        return this.helpers.has(this.map, keys);
-    }
-
-    delete(keys) {
-        return this.helpers.delete(this.map, keys);
-    }
+    return {
+        set: (keys, value) => helpers.set(map, keys, value),
+        get: keys => helpers.get(map, keys),
+        has: keys => helpers.has(map, keys),
+        delete: keys => helpers.delete(map, keys)
+    };
 }

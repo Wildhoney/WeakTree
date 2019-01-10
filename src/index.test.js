@@ -23,6 +23,15 @@ test('It should be able to set, get and delete from the composited WeakMap;', t 
     t.false(wt.delete([adam, maria]));
 });
 
+test('It should be able to function even without using the `new` to instantiate;', t => {
+    const wt = WeakTree();
+    wt.set([watford, adam], 'Adam');
+    wt.set([watford, maria], 'Maria');
+    t.true(wt.get([watford]) instanceof WeakMap);
+    t.is(wt.get([watford, adam]), 'Adam');
+    t.is(wt.get([watford, maria]), 'Maria');
+});
+
 test('It should be able to initialise the tree with a set of predefined values;', t => {
     const keys = [[[watford, adam], 'Adam'], [[watford, maria], 'Maria']];
 
