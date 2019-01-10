@@ -19,10 +19,10 @@ Use the array notation to set keys for your `WeakTree`. You can perform the same
 ```javascript
 import WeakTree from 'weaktree';
 
+const tree = new WeakTree();
+
 const a = {};
 const b = {};
-
-const tree = new WeakTree();
 
 const x = {};
 const y = {};
