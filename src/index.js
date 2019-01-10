@@ -1,20 +1,18 @@
-const set = function recurse(map, keys, value) {
-    const [key, ...remainingKeys] = keys;
-    const isLast = keys.length === 1;
+const set = function recurse(map, [key, ...keys], value) {
+    const isLast = keys.length === 0;
     const isValid = map.has(key);
     const result =
         (!isValid || isLast) && map.set(key, isLast ? value : new WeakMap());
-    return isLast ? result : recurse(map.get(key), remainingKeys, value);
+    return isLast ? result : recurse(map.get(key), keys, value);
 };
 
 const get = f =>
-    function recurse(map, keys) {
-        const [key, ...remainingKeys] = keys;
-        const isLast = keys.length === 1;
+    function recurse(map, [key, ...keys]) {
+        const isLast = keys.length === 0;
         const isValid = map.has(key);
         return isLast || !isValid
             ? f.call(map, key)
-            : recurse(map.get(key), remainingKeys);
+            : recurse(map.get(key), keys);
     };
 
 export default function WeakTree(iterator) {
