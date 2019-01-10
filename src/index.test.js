@@ -1,37 +1,36 @@
 import test from 'ava';
 import WeakTree from './index.js';
 
-const key = {
-    adam: function adam() {},
-    maria: function maria() {},
-    watford: function watford() {}
-};
+const adam = {};
+const maria = {};
+const watford = {};
 
 test('It should be able to set, get and delete from the composited WeakMap;', t => {
     const wt = new WeakTree();
 
-    wt.set([key.watford, key.adam], 'Adam');
-    wt.set([key.watford, key.maria], 'Maria');
+    wt.set([watford, adam], 'Adam');
+    wt.set([watford, maria], 'Maria');
 
-    t.is(wt.get([key.watford, key.adam]), 'Adam');
-    t.is(wt.get([key.watford, key.maria]), 'Maria');
+    t.true(wt.get([watford]) instanceof WeakMap);
+    t.is(wt.get([watford, adam]), 'Adam');
+    t.is(wt.get([watford, maria]), 'Maria');
 
-    wt.delete([key.watford, key.adam]);
-    t.false(wt.has([key.watford, key.adam]));
-    t.true(wt.has([key.watford, key.maria]));
+    t.true(wt.delete([watford, adam]));
+    t.false(wt.has([watford, adam]));
+    t.true(wt.has([watford, maria]));
 
-    t.false(wt.has([key.adam, key.maria]));
-    t.false(wt.delete([key.adam, key.maria]));
+    t.false(wt.has([adam, maria]));
+    t.false(wt.delete([adam, maria]));
 });
 
 test('It should return the same types from the functions as WeakMap itself;', t => {
     const wt = new WeakTree();
     const wm = new WeakMap();
     t.is(
-        wt.set([key.watford], 'Watford').toString(),
-        wm.set(key.watford, 'Watford').toString()
+        wt.set([watford], 'Watford').toString(),
+        wm.set(watford, 'Watford').toString()
     );
-    t.is(wt.get([key.watford]), wm.get(key.watford));
-    t.is(wt.has([key.watford]), wm.has(key.watford));
-    t.is(wt.delete([key.watford]), wm.delete(key.watford));
+    t.is(wt.get([watford]), wm.get(watford));
+    t.is(wt.has([watford]), wm.has(watford));
+    t.is(wt.delete([watford]), wm.delete(watford));
 });
