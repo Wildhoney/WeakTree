@@ -23,6 +23,17 @@ test('It should be able to set, get and delete from the composited WeakMap;', t 
     t.false(wt.delete([adam, maria]));
 });
 
+test('It should be able to take a slice of the tree to select a sub-tree;', t => {
+    const wt = new WeakTree();
+
+    wt.set([watford, adam], 'Adam');
+    wt.set([watford, maria], 'Maria');
+
+    const swt = wt.slice([watford]);
+    t.is(swt.get([adam]), 'Adam');
+    t.is(swt.get([maria]), 'Maria');
+});
+
 test('It should be able to function even without using the `new` to instantiate;', t => {
     const wt = WeakTree();
     wt.set([watford, adam], 'Adam');

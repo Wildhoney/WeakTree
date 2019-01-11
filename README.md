@@ -14,7 +14,9 @@
 
 ## Getting Started
 
-Use the array notation to set keys for your `WeakTree`. You can perform the same operations on a `WeakTree` as you can on a `WeakMap`, such as `set`, `get`, `has` and `delete`.
+Use the array notation to set keys for your `WeakTree`.
+
+You can perform the same operations on a `WeakTree` as you can on a `WeakMap`, such as `set`, `get`, `has` and `delete`. However `WeakTree` also has an additional function `slice` to take a slice of the tree which will give you a sub-tree.
 
 ```javascript
 import WeakTree from 'weaktree';
@@ -32,5 +34,8 @@ tree.set([a, b, x], `Life without love is like a tree without blossoms or fruit.
 tree.set([a, b, y], `If you don't like how things are, change it! You're not a tree.`);
 tree.set([a, b, z], `I looked up my family tree and found out I was the sap.`);
 
-tree.get([a, b, y]); // If you don't like how things are, change it! You're not a tree.
+tree.get([a, b, x]); // Life without love is like a tree without blossoms or fruit.
+
+const subTree = tree.slice([a, b]);
+subTree.get([x]); // If you don't like how things are, change it! You're not a tree.
 ```

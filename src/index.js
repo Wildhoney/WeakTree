@@ -15,9 +15,7 @@ const get = f =>
             : recurse(map.get(key), keys);
     };
 
-export default function WeakTree(iterator) {
-    const map = new WeakMap();
-
+export default function WeakTree(iterator, map = new WeakMap()) {
     const helpers = {
         set: set,
         get: get(map.get),
@@ -34,6 +32,10 @@ export default function WeakTree(iterator) {
         set: (keys, value) => helpers.set(map, keys, value),
         get: keys => helpers.get(map, keys),
         has: keys => helpers.has(map, keys),
-        delete: keys => helpers.delete(map, keys)
+        delete: keys => helpers.delete(map, keys),
+        slice: keys => {
+            const value = helpers.get(map, keys);
+            return value instanceof WeakMap ? new WeakTree(null, value) : value;
+        }
     };
 }
