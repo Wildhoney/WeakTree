@@ -32,6 +32,9 @@ test('It should be able to take a slice of the tree to select a sub-tree;', t =>
     const swt = wt.slice([watford]);
     t.is(swt.get([adam]), 'Adam');
     t.is(swt.get([maria]), 'Maria');
+
+    t.is(wt.slice([adam]), undefined);
+    t.is(wt.slice([maria]), undefined);
 });
 
 test('It should be able to function even without using the `new` to instantiate;', t => {
